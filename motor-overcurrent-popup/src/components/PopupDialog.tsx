@@ -1,8 +1,11 @@
 import { 
     Dialog,          
+    DialogTitle,
     DialogContent,   
-    DialogPortal,    
+    DialogPortal,   
+    DialogOverlay 
   } from '@radix-ui/react-dialog';
+  import '../styles/PopupDialog.css';
 
 interface PopupDialogProps {
     overcurrents: {
@@ -25,10 +28,16 @@ export default function PopupDialog({ overcurrents, open, onOpenChange }: PopupD
 
     return (
         <>
-            <Dialog title="🚨FATAL WARNING🚨" open={open} onOpenChange={onOpenChange}>
+            <Dialog open={open} onOpenChange={onOpenChange}>
                 <DialogPortal>
-                    <DialogContent>
-                        Overcurrent detected in {getDangerousMotors(overcurrents)}
+                    <DialogOverlay className="dialog-overlay" />
+                    <DialogContent className="dialog-content">
+                        <DialogTitle className="dialog-title">
+                            🚨 FATAL WARNING 🚨
+                        </DialogTitle>
+                        <div className="dialog-message">
+                            Overcurrent detected in {getDangerousMotors(overcurrents)}
+                        </div>
                     </DialogContent>
                 </DialogPortal>
             </Dialog>
